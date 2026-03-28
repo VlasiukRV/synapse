@@ -1,9 +1,16 @@
-version: '3.8'
+#docker-compose.yml
 
 services:
-  dynamic_ui:
+  synapse:
     build:
       context: .
-    container_name: dynamic_ui
+      dockerfile: Dockerfile
+    container_name: synapse_core
+    env_file:
+      - .env
     ports:
-      - "3000:80"
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./data:/app/data
+    restart: always

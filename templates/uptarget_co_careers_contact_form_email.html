@@ -2,50 +2,88 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <style>
-        .wrapper { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f9f9f9; padding: 40px 20px; }
-        .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .header { padding: 30px; text-align: center; border-bottom: 1px solid #eeeeee; }
-        .content { padding: 40px; color: #1a1a1c; line-height: 1.6; }
-        .field { margin-bottom: 20px; border-bottom: 1px inset #f4f4f4; padding-bottom: 10px; }
-        .label { font-size: 12px; color: #888888; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
-        .value { font-size: 16px; color: #1a1a1c; margin-top: 5px; font-weight: 500; }
-        .footer { padding: 20px; text-align: center; font-size: 12px; color: #999999; background: #fdfdfd; }
-
-        /* Цветовые схемы */
-        .brand-uptarget { border-top: 6px solid #ff5700; }
-        .brand-tsb { border-top: 6px solid #6b21a8; }
-    </style>
+    <title>{{ form_name }}</title>
 </head>
-<body>
-    <div class="wrapper">
-        <div class="container {{ brand_class }}">
+<body style="margin:0; padding:0; background:#f5f5f5; font-family:Montserrat, Arial, sans-serif;">
 
-            <div class="header">
-                <img src="{{ logo_url }}" alt="Logo" style="max-height: 40px;">
-            </div>
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5; padding:40px 0;">
+<tr>
+<td align="center">
 
-            <div class="content">
-                <h2 style="margin-top: 0; font-size: 20px;">New {{ form_name }} Submission</h2>
-                <p style="color: #666;">You have received a new signal through the Synapse Engine.</p>
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-collapse:collapse;">
 
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+    <!-- TOP ACCENT -->
+    <tr>
+        <td style="height:6px; background:#fd0;"></td>
+    </tr>
 
-                {% for key, value in data.items() %}
-                    {% if key != 'confirm_email' %}
-                    <div class="field">
-                        <div class="label">{{ key | replace('_', ' ') }}</div>
-                        <div class="value">{{ value }}</div>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+    <!-- HEADER -->
+    <tr>
+        <td style="padding:30px 40px; text-align:left;">
+            <img src="https://uptarget-co.tsb-enterprise.com/img/logo-sign-p-130x130q80.png" alt="Logo" style="height:32px;">
+        </td>
+    </tr>
 
-            <div class="footer">
-                &copy; {{ year }} {{ company_name }}. Sent via TSB.<br>
-                Sheridan, WY
-            </div>
-        </div>
-    </div>
+    <!-- TITLE -->
+    <tr>
+        <td style="padding:0 40px;">
+            <h2 style="margin:0; font-size:22px; color:#1a1a1c; font-weight:700;">
+                New {{ form_name }} Submission
+            </h2>
+            <p style="margin-top:10px; color:#1a1a1ccc; font-size:14px;">
+                You’ve received a new message via Synapse.
+            </p>
+        </td>
+    </tr>
+
+    <!-- DIVIDER -->
+    <tr>
+        <td style="padding:20px 40px;">
+            <hr style="border:none; border-top:1px solid #eeeeee;">
+        </td>
+    </tr>
+
+    <!-- FIELDS -->
+    {% for key, value in data.items() %}
+        {% if key != 'confirm_email' %}
+        <tr>
+            <td style="padding:10px 40px;">
+                <div style="font-size:11px; letter-spacing:1px; color:#888; text-transform:uppercase; font-weight:600;">
+                    {{ key | replace('_', ' ') }}
+                </div>
+                <div style="font-size:15px; color:#1a1a1c; margin-top:5px;">
+                    {{ value }}
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+
+    <!-- CTA -->
+    <tr>
+        <td style="padding:30px 40px;">
+            <a href="mailto:{{ reply_to or 'hello@uptarget.co' }}"
+               style="display:inline-block; background:#fd0; color:#1a1a1c; text-decoration:none;
+                      padding:14px 24px; font-weight:bold; font-size:13px;
+                      text-transform:uppercase; border:2px solid #ffffff;">
+                Reply
+            </a>
+        </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+        <td style="padding:20px 40px; font-size:12px; color:#999; border-top:1px solid #eee;">
+            © {{ year }} {{ company_name }}<br>
+            <span style="color:#1a1a1c80;">Sent via Synapse Engine</span>
+        </td>
+    </tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
 </body>
 </html>
