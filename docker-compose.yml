@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  dynamic_ui:
+    build:
+      context: .
+    container_name: dynamic_ui
+    ports:
+      - "3000:80"

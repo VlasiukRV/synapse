@@ -1,0 +1,46 @@
+[
+  {
+    "client_id": "client_alpha_123",
+    "form_name": "contact_form",
+    "fields": {
+      "name": {
+        "type": "str",
+        "label": "Full Name",
+        "required": true,
+        "min_length": 2
+      },
+      "email": {
+        "type": "email",
+        "label": "Email Address",
+        "required": true,
+        "pattern": "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+      },
+      "confirm_email": {
+        "type": "str",
+        "required": false
+      },
+      "message": {
+        "type": "text",
+        "label": "Your Message",
+        "required": true,
+        "max_length": 500
+      }
+    },
+    "flow": [
+      {
+        "action": "db_save",
+        "params": {
+          "target": "json"
+        }
+      },
+      {
+        "action": "email_send",
+        "params": {
+          "template": "base_email.html",
+          "to": "roman.vlasiuk@uptarget.net",
+          "subject": "[contact_form] TSB"
+        }
+      }
+    ]
+  }
+]
