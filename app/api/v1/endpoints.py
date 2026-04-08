@@ -37,10 +37,23 @@ async def receive_signal(
     except Exception as e:
         raise HTTPException(status_code=422, detail=str(e))
 
-    results = await engine.run_flow(
-        flow_config=config.get("flow", []),
-        data=validated_dict,
-        context={"client_id": config["client_id"]}
-    )
+    try:
+        results = await engine.run_flow(
+            flow_config=config.get("flow", []),
+            data=validated_dict,
+            context={"client_id": config["client_id"]}
+        )
 
-    return {"status": "success", "actions_executed": results}
+        return {
+            "status": "success",
+            "actions_executed": results
+        }
+
+    except HTTPException as http_exc:
+        raise http_exc
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal engine error: {str(e)}"
+        )

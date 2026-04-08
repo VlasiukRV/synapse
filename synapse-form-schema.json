@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["form_name", "fields", "flow"],
+    "properties": {
+      "client_id": { "type": "string" },
+      "form_name": { "type": "string" },
+      "title": { "type": "string" },
+      "fields": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["str", "email", "text", "password"] },
+            "label": { "type": "string" },
+            "placeholder": { "type": "string" },
+            "required": { "type": "boolean" },
+            "hidden": { "type": "boolean" },
+            "min_length": { "type": "integer" },
+            "max_length": { "type": "integer" },
+            "pattern": { "type": "string" }
+          }
+        }
+      },
+      "flow": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["action"],
+          "properties": {
+            "action": { "enum": ["db_save", "email_send", "auth_check"] },
+            "critical": { "type": "boolean" },
+            "params": { "type": "object" }
+          }
+        }
+      }
+    }
+  }
+}
