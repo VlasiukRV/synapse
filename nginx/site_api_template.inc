@@ -2,7 +2,7 @@
 
 location /api/ {
 
-            proxy_pass http://host.docker.internal:8000;
+            proxy_pass http://synapse:8000;
             proxy_set_header X-Client-ID $client_id;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
