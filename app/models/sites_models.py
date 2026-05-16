@@ -64,7 +64,7 @@ class SiteConfig(Base):
 class BuildLog(Base):
     __tablename__ = "build_logs"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     site_id = Column(String, ForeignKey("sites.id"))
     started_at = Column(DateTime, default=datetime.utcnow)
     success = Column(Boolean, default=False)

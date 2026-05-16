@@ -26,6 +26,9 @@ class BuildLogResponse(BaseModel):
     started_at: datetime
     log_output: Optional[str]
 
+    class Config:
+        from_attributes = True
+
 class NginxConfigBase(BaseModel):
     port: int
     extra_config: Optional[str] = None
