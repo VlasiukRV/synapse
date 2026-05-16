@@ -1,6 +1,6 @@
-from app.actions.auth_act import AuthCheckAction
-from app.actions.email_act import EmailAction
-from app.actions.db_act import DbSaveAction
+from app.services.actions.auth_actiion import AuthCheckAction
+from app.services.actions.email_action import EmailAction
+from app.services.actions.db_action import DbSaveAction
 
 
 class SynapseEngine:

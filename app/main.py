@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from app.database import engine, Base
+
 from app.api.v1.endpoints import router as api_v1_router
+from app.api.v1.sites_api import router as api_v1_sites_router
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -23,3 +29,4 @@ app.add_middleware(
 )
 
 app.include_router(api_v1_router, prefix="/api/v1/synapse")
+app.include_router(api_v1_sites_router, prefix="/api/v1/sites")

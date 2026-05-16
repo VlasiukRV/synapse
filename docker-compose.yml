@@ -14,4 +14,18 @@ services:
     volumes:
       - ./app:/app/app
       - ./data:/app/data
+      - ./nginx:/app/nginx
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+  nginx-sites:
+    image: nginx:alpine
+    container_name: nginx-sites
+    env_file:
+      - .env
+    volumes:
+      - ${HOST_PROJECT_PATH}/storage:/var/www/html:ro
+      - ./nginx/:/etc/nginx/conf.d:ro
+    ports:
+      - "8091-8101:8091-8101"
     restart: always

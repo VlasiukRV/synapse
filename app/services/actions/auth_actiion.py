@@ -1,7 +1,7 @@
 # app/actions/auth_act.py
 import logging
 from fastapi import HTTPException
-from app.actions.base import BaseAction
+from app.services.actions.base_action import BaseAction
 from app.core.auth import create_access_token, verify_password
 
 logger = logging.getLogger("uvicorn.error")

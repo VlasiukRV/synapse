@@ -2,7 +2,7 @@ import json
 import os
 import logging
 from datetime import datetime
-from app.actions.base import BaseAction
+from app.services.actions.base_action import BaseAction
 
 STORAGE_PATH = "/app/data/storage"
 logger = logging.getLogger("uvicorn.error")
